@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
+import { useAuth } from "../context/useAuth";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, login } = useAuth();
+  console.log("Current user :", user);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -12,8 +15,10 @@ export const Login = () => {
       alert("Please enter email and password");
       return;
     }
-    console.log(email);
-    console.log(password);
+
+    login(email);
+
+    console.log("Login Successful");
   };
 
   return (
