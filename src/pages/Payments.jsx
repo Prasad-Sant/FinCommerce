@@ -1,9 +1,11 @@
 import { Button, Card, Container } from "react-bootstrap";
 import { useCart } from "../context/useCart";
 import { useNavigate } from "react-router-dom";
+import { useOrder } from "../context/useOrder";
 
 export const Payments = () => {
   const { cartItems, clearCart } = useCart();
+  const { addOrder } = useOrder();
   const navigate = useNavigate();
 
   const cartTotal = cartItems.reduce(
@@ -12,6 +14,16 @@ export const Payments = () => {
   );
 
   const handlePayment = () => {
+    const newOrder = {
+      id: Date.now(),
+      items: cartItems,
+      total: cartTotal,
+      status: "Confirmed",
+      date: new Date().toLocaleDateString(),
+    };
+
+    addOrder(newOrder);
+
     alert("Payment Successful");
     alert("Redirecting to Orders");
     clearCart();
