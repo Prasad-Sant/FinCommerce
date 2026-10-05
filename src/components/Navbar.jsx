@@ -1,8 +1,10 @@
 import { Navbar as BootstrapNavbar, Container, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../context/useCart";
+import { useAuth } from "../context/useAuth";
 export const Navbar = () => {
   const { cartItems } = useCart();
+  const { user, logout } = useAuth();
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -30,9 +32,16 @@ export const Navbar = () => {
             </Nav>
 
             <Nav>
-              <Nav.Link as={NavLink} to="/login">
-                Login
-              </Nav.Link>
+              {user ? (
+                <>
+                  <Nav.Link disabled>{user.email}</Nav.Link>
+                  <Nav.Link onClick={logout}>Logout</Nav.Link>
+                </>
+              ) : (
+                <Nav.Link as={NavLink} to="/login">
+                  Login
+                </Nav.Link>
+              )}
             </Nav>
           </BootstrapNavbar.Collapse>
         </Container>
