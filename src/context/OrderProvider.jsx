@@ -8,9 +8,11 @@ export const OrderProvider = ({ children }) => {
     setOrders((previousOrders) => [...previousOrders, order]);
   };
 
+  const totalRevenue = orders.reduce((total, order) => total + order.total, 0);
+
   return (
     <>
-      <OrderContext.Provider value={{ orders, addOrder }}>
+      <OrderContext.Provider value={{ orders, addOrder, totalRevenue }}>
         {children}
       </OrderContext.Provider>
     </>
