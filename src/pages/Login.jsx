@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { useAuth } from "../context/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, login } = useAuth();
-  console.log("Current user :", user);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,7 +19,9 @@ export const Login = () => {
 
     login(email);
 
-    console.log("Login Successful");
+    alert("Login Successful");
+
+    navigate("/");
   };
 
   return (
