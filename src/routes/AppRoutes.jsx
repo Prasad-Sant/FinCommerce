@@ -12,6 +12,8 @@ import { AdminDashboard } from "./../pages/AdminDashboard";
 import { AdminProducts } from "./../pages/AdminProducts";
 import { AdminUsers } from "./../pages/AdminUsers";
 import { AdminOrders } from "./../pages/AdminOrders";
+import { NotFound } from "./../pages/NotFound";
+import { AccessDenied } from "./../pages/AccessDenied";
 
 export const AppRoutes = () => {
   return (
@@ -37,6 +39,8 @@ export const AppRoutes = () => {
           <Route path="orders" element={<AdminOrders></AdminOrders>}></Route>
           <Route path="users" element={<AdminUsers></AdminUsers>}></Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
+        <Route path="/access-denied" element={<AccessDenied />} />
       </Routes>
     </>
   );
