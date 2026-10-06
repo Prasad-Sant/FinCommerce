@@ -7,10 +7,11 @@ import { ProductDetails } from "../pages/ProductDetails";
 import { Checkout } from "../pages/Checkout";
 import { Payments } from "../pages/Payments";
 import { Orders } from "../pages/Orders";
-import { AdminDashboard } from "../pages/AdminDashboard";
-import { AdminProducts } from "../pages/AdminProducts";
-import { AdminOrders } from "../pages/AdminOrders";
+import { AdminLayout } from "./../components/AdminLayout";
+import { AdminDashboard } from "./../pages/AdminDashboard";
+import { AdminProducts } from "./../pages/AdminProducts";
 import { AdminUsers } from "./../pages/AdminUsers";
+import { AdminOrders } from "./../pages/AdminOrders";
 
 export const AppRoutes = () => {
   return (
@@ -27,19 +28,15 @@ export const AppRoutes = () => {
         <Route path="/checkout" element={<Checkout></Checkout>}></Route>
         <Route path="/payment" element={<Payments />}></Route>
         <Route path="/orders" element={<Orders></Orders>}></Route>
-        <Route
-          path="/admin"
-          element={<AdminDashboard></AdminDashboard>}
-        ></Route>
-        <Route
-          path="/admin/products"
-          element={<AdminProducts></AdminProducts>}
-        ></Route>
-        <Route
-          path="/admin/orders"
-          element={<AdminOrders></AdminOrders>}
-        ></Route>
-        <Route path="/admin/users" element={<AdminUsers></AdminUsers>}></Route>
+        <Route path="/admin" element={<AdminLayout></AdminLayout>}>
+          <Route index element={<AdminDashboard></AdminDashboard>}></Route>
+          <Route
+            path="products"
+            element={<AdminProducts></AdminProducts>}
+          ></Route>
+          <Route path="orders" element={<AdminOrders></AdminOrders>}></Route>
+          <Route path="users" element={<AdminUsers></AdminUsers>}></Route>
+        </Route>
       </Routes>
     </>
   );
