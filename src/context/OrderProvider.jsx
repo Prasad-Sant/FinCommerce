@@ -8,11 +8,26 @@ export const OrderProvider = ({ children }) => {
     setOrders((previousOrders) => [...previousOrders, order]);
   };
 
+  const updateOrderStatus = (orderId, newStatus) => {
+    setOrders((previousOrders) =>
+      previousOrders.map((order) =>
+        order.id === orderId
+          ? {
+              ...order,
+              status: newStatus,
+            }
+          : order,
+      ),
+    );
+  };
+
   const totalRevenue = orders.reduce((total, order) => total + order.total, 0);
 
   return (
     <>
-      <OrderContext.Provider value={{ orders, addOrder, totalRevenue }}>
+      <OrderContext.Provider
+        value={{ orders, addOrder, updateOrderStatus, totalRevenue }}
+      >
         {children}
       </OrderContext.Provider>
     </>

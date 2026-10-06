@@ -18,7 +18,7 @@ export const Cart = () => {
         Shopping Cart
       </h1>
 
-      {cartItems == 0 ? (
+      {cartItems === 0 ? (
         <div>
           <Card className="mt-3 p-4">
             <Card.Title>Empty Cart </Card.Title>
@@ -69,17 +69,17 @@ export const Cart = () => {
               <b>
                 <u>₹{calculateTotal}</u>
               </b>
-              <div>
-                <Button
-                  variant="primary"
-                  as={Link}
-                  to="/checkout"
-                  className="mt-2"
-                >
-                  Proceed to checkout
-                </Button>
-              </div>
             </Card.Text>
+            <div>
+              <Button
+                variant="primary"
+                as={Link}
+                to="/checkout"
+                className="mt-2"
+              >
+                Proceed to checkout
+              </Button>
+            </div>
           </Card>
         </div>
       )}

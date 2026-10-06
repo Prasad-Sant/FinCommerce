@@ -9,6 +9,8 @@ import { Payments } from "../pages/Payments";
 import { Orders } from "../pages/Orders";
 import { AdminDashboard } from "../pages/AdminDashboard";
 import { AdminProducts } from "../pages/AdminProducts";
+import { AdminOrders } from "../pages/AdminOrders";
+import { AdminUsers } from "./../pages/AdminUsers";
 
 export const AppRoutes = () => {
   return (
@@ -33,6 +35,11 @@ export const AppRoutes = () => {
           path="/admin/products"
           element={<AdminProducts></AdminProducts>}
         ></Route>
+        <Route
+          path="/admin/orders"
+          element={<AdminOrders></AdminOrders>}
+        ></Route>
+        <Route path="/admin/users" element={<AdminUsers></AdminUsers>}></Route>
       </Routes>
     </>
   );
