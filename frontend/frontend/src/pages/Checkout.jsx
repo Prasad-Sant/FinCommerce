@@ -9,7 +9,11 @@ export const Checkout = () => {
     (total, item) => total + item.quantity * item.price,
     0,
   );
-
+  const formatPrice = (price) =>
+    Number(price).toLocaleString("en-IN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
   if (cartItems.length === 0) {
     return (
       <Container className="mt-4">
@@ -45,7 +49,7 @@ export const Checkout = () => {
                 <span>
                   {item.name}×{item.quantity}
                 </span>
-                <span>₹{item.quantity * item.price}</span>
+                <span>₹{formatPrice(item.quantity * item.price)}</span>
               </div>
             ))}
             <hr />
@@ -57,7 +61,7 @@ export const Checkout = () => {
               >
                 Total Amount :{" "}
                 <b>
-                  <u>{cartTotal}</u>
+                  <u>₹{formatPrice(cartTotal)}</u>
                 </b>
               </h4>
             </div>

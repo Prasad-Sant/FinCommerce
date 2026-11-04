@@ -1,0 +1,15 @@
+# Maven build output
+target/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Eclipse files
+.metadata/
+.settings/
+.classpath
+.project
+
+# Logs
+*.log
