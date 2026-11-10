@@ -1,11 +1,25 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useOrder } from "../context/useOrder";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllProducts } from "../api/productService";
 
 export const AdminDashboard = () => {
   const { orders, totalRevenue } = useOrder();
-  console.log("Admin Dashboard orders:", orders);
-  console.log("Admin Dashboard revenue:", totalRevenue);
+  const [totalProducts, setTotalProducts] = useState(0);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const products = await getAllProducts();
+        setTotalProducts(products.length);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
   return (
     <Container className="mt-4">
       <h1>Admin Dashboard</h1>
@@ -23,7 +37,7 @@ export const AdminDashboard = () => {
           <Card className="shadow-sm">
             <Card.Body>
               <Card.Title>Total Products:</Card.Title>
-              <Card.Text className="fs-2">5</Card.Text>
+              <Card.Text className="fs-2">{totalProducts}</Card.Text>
             </Card.Body>
           </Card>
         </Col>
@@ -41,7 +55,7 @@ export const AdminDashboard = () => {
           <Card className="shadow-sm">
             <Card.Body>
               <Card.Title>Total Users:</Card.Title>
-              <Card.Text className="fs-2">5000</Card.Text>
+              <Card.Text className="fs-5 text-muted">Not available</Card.Text>
             </Card.Body>
           </Card>
         </Col>

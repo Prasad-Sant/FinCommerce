@@ -14,10 +14,6 @@ export const Orders = () => {
         setError("");
 
         const data = await getAllOrders();
-        console.log("Orders data:", data);
-        console.log("First order:", data[0]);
-        console.log("First order keys:", Object.keys(data[0] ?? {}));
-        console.log("First order item:", data[0]?.orderItems?.[0]);
         setOrders(data);
       } catch (err) {
         console.error("Failed to fetch orders:", err);

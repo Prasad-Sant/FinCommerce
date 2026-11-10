@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { useAuth } from "../context/useAuth";
 import { useNavigate } from "react-router-dom";
+import { apiClient } from "../api/productService";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ export const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -17,11 +18,20 @@ export const Login = () => {
       return;
     }
 
-    login(email);
+    try {
+      const response = await apiClient.post("/auth/login", {
+        email,
+        password,
+      });
 
-    alert("Login Successful");
+      login(response.data);
 
-    navigate("/");
+      alert("Login Successful");
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert(error.response?.data?.message || "Invalid email or password");
+    }
   };
 
   return (

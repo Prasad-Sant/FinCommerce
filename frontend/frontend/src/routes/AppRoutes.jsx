@@ -14,6 +14,7 @@ import { AdminUsers } from "./../pages/AdminUsers";
 import { AdminOrders } from "./../pages/AdminOrders";
 import { NotFound } from "./../pages/NotFound";
 import { AccessDenied } from "./../pages/AccessDenied";
+import { AdminRoute } from "../components/AdminRoute";
 
 export const AppRoutes = () => {
   return (
@@ -30,14 +31,13 @@ export const AppRoutes = () => {
         <Route path="/checkout" element={<Checkout></Checkout>}></Route>
         <Route path="/payment" element={<Payments />}></Route>
         <Route path="/orders" element={<Orders></Orders>}></Route>
-        <Route path="/admin" element={<AdminLayout></AdminLayout>}>
-          <Route index element={<AdminDashboard></AdminDashboard>}></Route>
-          <Route
-            path="products"
-            element={<AdminProducts></AdminProducts>}
-          ></Route>
-          <Route path="orders" element={<AdminOrders></AdminOrders>}></Route>
-          <Route path="users" element={<AdminUsers></AdminUsers>}></Route>
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="users" element={<AdminUsers />} />
+          </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
         <Route path="/access-denied" element={<AccessDenied />} />

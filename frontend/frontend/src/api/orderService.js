@@ -1,12 +1,22 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "http://localhost:8081/api";
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
 });
 
 export const createOrder = async (orderRequest) => {
@@ -15,7 +25,7 @@ export const createOrder = async (orderRequest) => {
 };
 
 export const getAllOrders = async () => {
-  const response = await apiClient.get("/orders");
+  const response = await apiClient.get("/orders/my-orders");
   return response.data;
 };
 
