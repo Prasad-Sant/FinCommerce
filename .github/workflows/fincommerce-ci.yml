@@ -95,4 +95,6 @@ jobs:
           context: ./backend/FinCommerceBackend
           file: ./backend/FinCommerceBackend/Dockerfile
           push: true
-          tags: prasadsant1712/fincommerce-backend:latest
+          tags: |
+            prasadsant1712/fincommerce-backend:latest
+            prasadsant1712/fincommerce-backend:sha-${{ github.sha }}
