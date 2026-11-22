@@ -1,0 +1,21 @@
+name: FinCommerce CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  first-workflow:
+    name: First CI Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Welcome
+        run: echo "Hello from FinCommerce GitHub Actions!"
+
+      - name: Show runner information
+        run: |
+          echo "This job is running on GitHub's runner."
