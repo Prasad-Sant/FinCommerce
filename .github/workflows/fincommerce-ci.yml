@@ -24,6 +24,17 @@ jobs:
           java-version: "25"
           cache: maven
 
+      - name: Access practice secret
+        env:
+          PRACTICE_SECRET: ${{ secrets.PRACTICE_SECRET }}
+        run: |
+          if [ -n "$PRACTICE_SECRET" ]; then
+            echo "Practice secret is available."
+          else
+            echo "Practice secret is missing."
+            exit 1
+          fi
+
       - name: Build Spring Boot backend
         working-directory: backend/FinCommerceBackend
         run: mvn -B clean verify
